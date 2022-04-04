@@ -4,9 +4,6 @@ else
   alias ls='exa --group-directories-first'
 fi
 
-# Argh
-alias sup="sudo pacman -Suy"
-
 # Kitty
 # https://gist.github.com/katef/fb4cb6d47decd8052bd0e8d88c03a102
 # https://twitter.com/thingskatedid/status/1316074032379248640

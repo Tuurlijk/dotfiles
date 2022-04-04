@@ -73,6 +73,23 @@ export USE_PISTOL=0
 export PISTOL_DEBUG=0
 
 # Exa https://the.exa.website/docs/colour-themes
+#
+#  Permissions                        File sizes                       Hard links                    Details and metadata
+#
+#    ur User +r bit                       sn Size numbers                  lc Number of links            xx Punctuation
+#    uw User +w bit                       sb Size unit                     lm A multi-link file          da Timestamp
+#    ux User +x bit (files)               df Major device ID                                             in File inode
+#    ue User +x bit (file types)          ds Minor device ID           Git                               bl Number of blocks
+#    gr Group +r bit                                                                                     hd Table header row
+#    gw Group +w bit                  Owners and Groups                    ga New                        lp Symlink path
+#    gx Group +x bit                                                       gm Modified                   cc Control character
+#    tr Others +r bit                     uu A user that’s you             gd Deleted
+#    tw Others +w bit                     un A user that’s not             gv Renamed                Overlays
+#    tx Others +x bit                     gu A group with you in it        gt Type change
+#    su Higher bits (files)               gn A group without you                                         bO Broken link path
+#    sf Higher bits (other types)
+#    xa Extended attribute marker
+#
 export EXA_COLORS="da=38;5;67:sn=38;5;28:uu=38;5;65:sb=38;33"
 
 # See ~/bin/sunrise-sunset.sh
