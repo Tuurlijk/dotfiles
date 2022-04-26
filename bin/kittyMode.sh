@@ -24,8 +24,8 @@ gtk_theme=(
 )
 declare -A bat_theme
 bat_theme=(
-  [dark]="OneHalfDark"
-  [light]="OneHalfLight"
+  [dark]="Pop-dark"
+  [light]="Pop"
 )
 declare -A iconlookup_dirtxt
 iconlookup_dirtxt=(
