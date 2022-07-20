@@ -19,13 +19,13 @@ kitty_background_image=(
 )
 declare -A gtk_theme
 gtk_theme=(
-  [dark]="Adwaita-dark"
-  [light]="Adwaita"
+  [dark]="Pop-dark"
+  [light]="Pop"
 )
 declare -A bat_theme
 bat_theme=(
-  [dark]="Pop-dark"
-  [light]="Pop"
+  [dark]="OneHalfDark"
+  [light]="OneHalfLight"
 )
 declare -A iconlookup_dirtxt
 iconlookup_dirtxt=(
