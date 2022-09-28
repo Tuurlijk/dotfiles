@@ -101,7 +101,9 @@ if [[ -e /usr/share/autojump/autojump.zsh ]]; then
 fi
 
 # load Rust env
-. "$HOME/.cargo/env"
+if [[ -f "$HOME/.cargo/env" ]]; then
+  . "$HOME/.cargo/env"
+fi
 
 # Disabled because of slowness
 # # Ruby version manager
