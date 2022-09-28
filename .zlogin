@@ -4,4 +4,10 @@
 # Re-create cached files if needed
 (compileAllTheThings) &!
 
-~/bin/kittyMode.sh
+if [[ ${+WINDOWID} = 0 ]]
+then
+  # We are remote
+else
+  # We are local
+  ~/bin/kittyMode.sh
+fi
