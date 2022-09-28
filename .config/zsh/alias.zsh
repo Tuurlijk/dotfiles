@@ -1,6 +1,6 @@
 if [ $(uname) = Darwin ]; then
   alias ls='/usr/local/bin/gls --color=auto'
-else
+elif type exa > /dev/null; then
   alias ls='exa --group-directories-first'
 fi
 
@@ -53,12 +53,23 @@ alias dct='e_header "Clearing ./Web/typo3temp/*"; ds -c "echo removing \`find ./
 alias dei='e_header "Enabling install tool"; ds -c "touch ./Web/typo3conf/ENABLE_INSTALL_TOOL"; e_success Done'
 alias lzd='lazydocker -f ./.docker/docker-compose.yml'
 
-alias l="exa -l --group-directories-first"
-alias la="exa -lag --group-directories-first"
-# List only directories and symbolic links that point to directories
-alias lsd='exa -ldg --group-directories-first *(-/DN)'
-# List only file beginning with "."
-alias lsa='exa -ldg --group-directories-first .*'
+if type exa > /dev/null; then
+  alias l="exa -l --group-directories-first"
+  alias la="exa -lag --group-directories-first"
+  # List only directories and symbolic links that point to directories
+  alias lsd='exa -ldg --group-directories-first *(-/DN)'
+  # List only file beginning with "."
+  alias lsa='exa -ldg --group-directories-first .*'
+else
+  alias l="ls -F"
+  alias ll="ls -h -l "
+  alias la="ls -a"
+  # List only directories and symbolic links that point to directories
+  alias lsd='ls -ld *(-/DN)'
+  # List only file beginning with "."
+  alias lsa='ls -ld .*'
+fi
+
 if [[ -f /etc/arch-release ]] || [[ -f /etc/debian_version ]]; then
   alias grep="grep --color=auto"
 fi
