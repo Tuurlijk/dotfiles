@@ -96,7 +96,9 @@ export EXA_COLORS="da=38;5;67:sn=38;5;28:uu=38;5;65:sb=38;33"
 export LOCATION=NLXX5790
 
 # load autojump
-. /usr/share/autojump/autojump.zsh
+if [[ -e /usr/share/autojump/autojump.zsh ]]; then
+  . /usr/share/autojump/autojump.zsh
+fi
 
 # load Rust env
 . "$HOME/.cargo/env"
