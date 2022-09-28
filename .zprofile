@@ -33,7 +33,13 @@ path=(
 export LESS='-g -i -M -R -S -w -z-4'
 
 # Kitty theme
-~/bin/kittyMode.sh
+if [[ ${+WINDOWID} = 0 ]]
+then
+  # We are remote
+else
+  # We are local
+  ~/bin/kittyMode.sh
+fi
 source ${ZDOTDIR:-${HOME}}/.config/zsh/themes/env.zsh
 
 # Set the Less input preprocessor.
