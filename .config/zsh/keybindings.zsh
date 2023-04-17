@@ -12,6 +12,8 @@
 #     PageDown   "${terminfo[knp]}"
 # )
 
+# Set Emacs key binding mode - ctrl+a to go to start of line
+bindkey -e
 bindkey '^w' backward-kill-word
 bindkey '^h' backward-delete-char
 autoload -U history-search-end
