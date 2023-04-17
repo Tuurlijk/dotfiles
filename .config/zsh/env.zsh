@@ -4,9 +4,10 @@ SAVEHIST=3000
 # Share history between tmux windows
 setopt SHARE_HISTORY
 
-# Treat /, \ and _ aa word-boundaries
+# Treat \, . and _ as word-boundaries
 WORDCHARS=${WORDCHARS/\/}
 WORDCHARS=${WORDCHARS/_}
+WORDCHARS=${WORDCHARS/.}
 
 # Browser
 if [[ "$OSTYPE" == darwin* ]]; then
