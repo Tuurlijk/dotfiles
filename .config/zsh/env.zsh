@@ -4,6 +4,10 @@ SAVEHIST=3000
 # Share history between tmux windows
 setopt SHARE_HISTORY
 
+# Treat /, \ and _ aa word-boundaries
+WORDCHARS=${WORDCHARS/\/}
+WORDCHARS=${WORDCHARS/_}
+
 # Browser
 if [[ "$OSTYPE" == darwin* ]]; then
   export BROWSER='open'
