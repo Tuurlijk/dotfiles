@@ -31,7 +31,7 @@ theme.fg_urgent                     = "#8f0000"
 theme.bg_focus                      = "#101010a0"
 theme.bg_normal                     = "#202020a0"
 theme.bg_urgent                     = "#121212"
-theme.border_width                  = dpi(1)
+theme.border_width                  = 0
 theme.border_normal                 = "#121212"
 theme.border_focus                  = "#848484"
 
@@ -59,21 +59,17 @@ theme.hotkeys_modifiers_fg          = "#808080"
 theme.hotkeys_shape                 = hotkeysShape
 theme.hotkeys_group_margin          = dpi(20)
 
-
--- Notifications
-theme.notification_bg                           = "#232323"
-theme.notification_fg                           = "#e4e4e4"
+theme.notification_bg                           = "#101010a0"
+theme.notification_fg                           = "#f0f0f0"
 theme.notification_width                        = dpi(550)
-theme.notification_border_width                 = 0
-theme.notification_border_color                 = "#232323"
-theme.notification_shape                        = gears.shape.infobubble
-theme.notification_opacity                      = 0.75
-theme.notification_margin                       = dpi(20)
-theme.notification_font                         = "Ubuntu Nerd Font 14"
+theme.notification_border_color                 = "#202020a0"
+theme.notification_shape                        = hotkeysShape
+theme.notification_margin                       = dpi(10)
+theme.notification_font                         = "Ubuntu Nerd Font 13"
 theme.notification_position                     = 'top_right'
 theme.notification_spacing                      = dpi(15)
 theme.notification_icon_resize_strategy         = 'center'
-theme.notification_icon_size                    = dpi(250)
+theme.notification_icon_size                    = dpi(100)
 
 theme.tasklist_sticky                           = "<span color='#ff2cf3'>■ </span>"
 theme.tasklist_ontop                            = "<span color='#d8d8d8'>■ </span>"
