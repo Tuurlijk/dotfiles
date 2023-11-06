@@ -9,13 +9,13 @@
 --]]
 
 local gears = require("gears")
+local dpi   = require("beautiful.xresources").apply_dpi
 
 local titleBarBorderRadius = 6
 
 local hotkeysShape = function(cr, width, height, tl, tr, br, bl, rad)
     gears.shape.rounded_rect(cr, width, height, titleBarBorderRadius)
 end
-local notificationShape = hotkeysShape
 
 theme                               = {}
 
@@ -24,14 +24,14 @@ theme.wallpaper                     = os.getenv("HOME") .. "/dotfiles/Background
 
 theme.icon_theme                    = "Adwaita"
 
-theme.font                          = "sans 8"
+theme.font                          = "Ubuntu Nerd Font 11"
 theme.fg_focus                      = "#f0f0f0"
 theme.fg_normal                     = "#ffffff"
 theme.fg_urgent                     = "#8f0000"
 theme.bg_focus                      = "#101010a0"
 theme.bg_normal                     = "#202020a0"
 theme.bg_urgent                     = "#121212"
-theme.border_width                  = 0
+theme.border_width                  = dpi(1)
 theme.border_normal                 = "#121212"
 theme.border_focus                  = "#848484"
 
@@ -44,22 +44,36 @@ theme.bg_systray                    = "#40404000"
 theme.titlebar_bg_normal            = "#202020b0"
 theme.titlebar_bg_focus             = "#101010d0"
 
-theme.menu_height                   = 24
-theme.menu_width                    = 200
+theme.menu_height                   = dpi(24)
+theme.menu_width                    = dpi(200)
 
 theme.wibar_bg                      = "#00000060"
 theme.wibar_fg                      = "#f0f0f0f0"
 
 theme.hotkeys_bg                    = "png:" .. os.getenv("HOME") .. "/dotfiles/Background/dwm-mypattern.jpg"
 theme.hotkeys_fg                    = "#f0f0f0"
+theme.hotkeys_font                  = "Ubuntu Nerd Font 12"
+theme.hotkeys_description_font      = "Ubuntu Nerd Font 12"
 theme.hotkeys_label_fg              = "#101010"
 theme.hotkeys_modifiers_fg          = "#808080"
 theme.hotkeys_shape                 = hotkeysShape
-theme.hotkeys_group_margin          = 20
+theme.hotkeys_group_margin          = dpi(20)
 
-theme.notification_shape            = notificationShape
-theme.notification_border_color     = "#808080f0"
-theme.notification_width            = 550
+
+-- Notifications
+theme.notification_bg                           = "#232323"
+theme.notification_fg                           = "#e4e4e4"
+theme.notification_width                        = dpi(550)
+theme.notification_border_width                 = 0
+theme.notification_border_color                 = "#232323"
+theme.notification_shape                        = gears.shape.infobubble
+theme.notification_opacity                      = 0.75
+theme.notification_margin                       = dpi(20)
+theme.notification_font                         = "Ubuntu Nerd Font 14"
+theme.notification_position                     = 'top_right'
+theme.notification_spacing                      = dpi(15)
+theme.notification_icon_resize_strategy         = 'center'
+theme.notification_icon_size                    = dpi(250)
 
 theme.tasklist_sticky                           = "<span color='#ff2cf3'>■ </span>"
 theme.tasklist_ontop                            = "<span color='#d8d8d8'>■ </span>"
@@ -126,7 +140,7 @@ theme.titlebar_maximized_button_focus_inactive  = theme.dir .. "/icons/titlebar/
 theme.titlebar_maximized_button_normal_inactive = theme.dir .. "/icons/titlebar/maximized_normal_inactive.png"
 
 -- lain related
-theme.useless_gap_width                         = 15
+theme.useless_gap_width                         = dpi(15)
 theme.layout_centerfair                         = theme.dir .. "/icons/centerfair.png"
 theme.layout_termfair                           = theme.dir .. "/icons/termfair.png"
 theme.layout_centerwork                         = theme.dir .. "/icons/centerwork.png"
