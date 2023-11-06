@@ -51,7 +51,7 @@ awful.widget.watch(
         "cat /proc/stat | grep '^cpu '",
         updateInterval,
         function(widget, stdout, stderr, exitreason, exitcode)
-            local user, nice, system, idle, iowait, irq, softirq, steal, guest, guest_nice = stdout:match('(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s')
+            local user, nice, system, idle, iowait, irq, softirq, steal, guest, guest_nice = stdout:match('cpu%s+(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s(%d+)%s')
             local total = user + nice + system + idle + iowait + irq + softirq + steal
             local diff_idle = idle - idle_prev
             local diff_total = total - total_prev
