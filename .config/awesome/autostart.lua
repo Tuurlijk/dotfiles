@@ -14,20 +14,16 @@ local function run_once(cmd_arr)
 end
 
 -- entries must be comma-separated
-run_once({ "kbdd" })
-run_once({ "nm-applet -sm-disable" }) -- Network manager tray icon
-
--- Autorun programs
-autorun = true
-autorunApps = {
-    "systemctl --user start awesome.target",
-    "autorandr -c",
-    "compton -b",
+run_once({
     "/usr/lib/gsd-xsettings",
     "dex -a -e awesome",
-    "udiskie",
-    "setxkbmap -layout us",
+
     "synapse -s",
+    "udiskie",
+    "picom -b",
+    "autorandr -c",
+
+    "setxkbmap -layout us",
 
     -- Switch Wacom pen buttons; click button is secondary
     --"xinput set-prop 'Wacom Intuos PT M Pen stylus' 293 1572865",
@@ -36,10 +32,5 @@ autorunApps = {
     "xinput set-prop 'Synaptics TM3418-002' 'libinput Tapping Enabled' 1",
     "xinput set-prop 'Synaptics TM3418-002' 'libinput Natural Scrolling Enabled' 1",
     "xinput set-prop 'Synaptics TM3418-002' 'libinput Disable While Typing Enabled' 1",
-}
-
-if autorun then
-    for app = 1, #autorunApps do
-        awful.spawn.with_shell(autorunApps[app])
-    end
-end
+})
+run_once({ "nm-applet -sm-disable" }) -- Network manager tray icon
