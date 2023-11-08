@@ -37,12 +37,12 @@ theme.border_focus                  = "#848484"
 
 theme.tasklist_fg_focus             = "#f0f0f0"
 theme.tasklist_fg_normal            = "#f0f0f0"
-theme.tasklist_bg_focus             = "#101010d0"
+theme.tasklist_bg_focus             = "linear:0,0:0,18:0,#808080d0:0.3,#101010d0:1,#101010d0"
 theme.tasklist_bg_normal            = "#404040d0"
 theme.bg_systray                    = "#40404000"
 
 theme.titlebar_bg_normal            = "#202020b0"
-theme.titlebar_bg_focus             = "#101010d0"
+theme.titlebar_bg_focus             = "linear:0,0:0,18:0,#808080d0:0.3,#101010d0:1,#101010d0"
 
 theme.menu_height                   = dpi(24)
 theme.menu_width                    = dpi(200)
@@ -50,14 +50,15 @@ theme.menu_width                    = dpi(200)
 theme.wibar_bg                      = "#00000060"
 theme.wibar_fg                      = "#f0f0f0f0"
 
-theme.hotkeys_bg                    = "png:" .. os.getenv("HOME") .. "/dotfiles/Background/dwm-mypattern.jpg"
+theme.hotkeys_bg                    = "linear:0,0:0,18:0,#808080d0:0.3,#101010d0:1,#101010d0"
+-- "png:" .. os.getenv("HOME") .. "/dotfiles/Background/dwm-mypattern.jpg"
 theme.hotkeys_fg                    = "#f0f0f0"
-theme.hotkeys_font                  = "Ubuntu Nerd Font 12"
-theme.hotkeys_description_font      = "Ubuntu Nerd Font 12"
+theme.hotkeys_font                  = "Ubuntu Nerd Font 11"
+theme.hotkeys_description_font      = "Ubuntu Nerd Font 11"
 theme.hotkeys_label_fg              = "#101010"
 theme.hotkeys_modifiers_fg          = "#808080"
 theme.hotkeys_shape                 = hotkeysShape
-theme.hotkeys_group_margin          = dpi(20)
+theme.hotkeys_group_margin          = dpi(16)
 
 theme.notification_bg                           = "#101010a0"
 theme.notification_fg                           = "#f0f0f0"
