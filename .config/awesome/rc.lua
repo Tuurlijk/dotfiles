@@ -31,7 +31,7 @@ local keys = require("keys")
 
 root.keys(keys.globalkeys)
 
-local dpi   = require("beautiful.xresources").apply_dpi
+local dpi = require("beautiful.xresources").apply_dpi
 
 -- Error handling
 require("errorHandling")
@@ -46,13 +46,13 @@ editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
 -- user defined
-local listBorderRadius = 0
-local titlebarBorderradius = 4
-local titlebarHeight = 18
-local separatorWidth = 5
+local listBorderRadius = dpi(8)
+local titlebarBorderradius = dpi(8)
+local titlebarHeight = dpi(18)
+local separatorWidth = dpi(5)
 
 -- set gaps
-beautiful.useless_gap = 4
+beautiful.useless_gap = dpi(8)
 beautiful.gap_single_client = true
 
 -- Separator widget
@@ -84,7 +84,7 @@ local function client_menu_toggle_fn()
             instance:hide()
             instance = nil
         else
-            instance = awful.menu.clients({ theme = { width = 250 } })
+            instance = awful.menu.clients({ theme = { width = dpi(250) } })
         end
     end
 end
@@ -214,7 +214,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3"}, s, awful.layout.layouts[1])
+    awful.tag({ "1", "2", "3" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -310,12 +310,14 @@ end)
 -- }}}
 
 ---- {{{ Mouse bindings
---root.buttons(gears.table.join(awful.button({}, 3, function()
---    mymainmenu:toggle()
---end),
---        awful.button({}, 4, awful.tag.viewnext),
---        awful.button({}, 5, awful.tag.viewprev)))
----- }}}
+awful.mouse.append_global_mousebindings({
+    awful.button({ }, 3, function()
+        mymainmenu:toggle()
+    end),
+    awful.button({ }, 4, awful.tag.viewprev),
+    awful.button({ }, 5, awful.tag.viewnext),
+})
+-- }}}
 
 clientButtons = gears.table.join(awful.button({}, 1, function(c)
     client.focus = c;
@@ -324,103 +326,7 @@ end),
         awful.button({ keys.modkey }, 1, awful.mouse.client.move),
         awful.button({ keys.modkey }, 3, awful.mouse.client.resize))
 
--- {{{ Rules
--- Rules to apply to new clients (through the "manage" signal).
-awful.rules.rules = {
-    -- All clients will match this rule.
-    {
-        rule = {},
-        properties = {
-            border_width = beautiful.border_width,
-            border_color = beautiful.border_normal,
-            focus = awful.client.focus.filter,
-            raise = true,
-            keys = keys.clientkeys,
-            buttons = clientButtons,
-            screen = awful.screen.preferred,
-            placement = awful.placement.no_overlap + awful.placement.no_offscreen
-        }
-    },
-
-    -- Floating clients.
-    {
-        rule_any = {
-            instance = {
-                "DTA", -- Firefox addon DownThemAll.
-                "copyq", -- Includes session name in class.
-            },
-            class = {
-                "Arandr",
-                "Gpick",
-                "Kruler",
-                "MessageWin", -- kalarm.
-                "Sxiv",
-                "Wpa_gui",
-                "pinentry",
-                "veromix",
-                "xtightvncviewer",
-                "jetbrains-*"
-            },
-            name = {
-                "Event Tester", -- xev.
-            },
-            role = {
-                "AlarmWindow", -- Thunderbird's calendar.
-                "pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
-            }
-
-        },
-        properties = { floating = true }
-    },
-
-    -- Add titlebars to normal clients and dialogs
-    {
-        rule_any = {
-            type = { "normal", "dialog" }
-        },
-        properties = { titlebars_enabled = true }
-    },
-
-    -- Remove borders from clients
-    {
-        rule_any = {
-            class = {
-                "Synapse",
-            }
-        },
-        properties = { border_width = 0 }
-    },
-
-    -- Remove titlebars from clients that provide custom close buttons
-    {
-        rule_any = {
-            class = {
-                "Gedit",
-                "Gnome-.*",
-                "Nautilus",
-                "Org.gnome.DejaDup",
-                "Pamac-.*"
-            }
-        },
-        properties = { titlebars_enabled = false }
-    },
-
-    {
-        rule = {
-            class = "jetbrains-.*",
-        },
-        properties = { focus = true }
-    },
-
-    {
-        rule = {
-            class = "jetbrains-.*",
-            name = "win.*"
-        },
-        properties = { titlebars_enabled = false, focusable = false, focus = true, floating = true, placement = awful.placement.restore }
-    },
-}
--- }}}
+require("rules")
 
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
@@ -444,32 +350,21 @@ end)
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
 client.connect_signal("request::titlebars", function(c)
     -- buttons for the titlebar
-    local buttons = gears.table.join(
-            awful.button({}, 1, function()
-                client.focus = c
-                c:raise()
-                awful.mouse.client.move(c)
-            end),
-            awful.button({}, 3, function()
-                client.focus = c
-                c:raise()
-                awful.mouse.client.resize(c)
-            end)
-    )
+    local buttons = {
+        awful.button({ }, 1, function()
+            c:activate { context = "titlebar", action = "mouse_move" }
+        end),
+        awful.button({ }, 3, function()
+            c:activate { context = "titlebar", action = "mouse_resize" }
+        end),
+    }
 
-    --if c.floating then
-    --    local floatButton = awful.titlebar.widget.floatingbutton(c)
-    --else
-    --    local floatButton = nil
-    --end
-
-    awful.titlebar(c, { size = titlebarHeight, position = "top" }):setup {
-        {
-            -- Left
+    awful.titlebar(c, { size = titlebarHeight, position = "top" }).widget = {
+        { -- Left
             buttons = buttons,
             layout = wibox.layout.fixed.horizontal
         },
-        {
+        { -- Middle
             buttons = buttons,
             layout = wibox.layout.flex.horizontal
         },
@@ -504,7 +399,6 @@ end)
 -- }}}
 
 -- {{{ Notifications
-
 ruled.notification.connect_signal('request::rules', function()
     -- All notifications will match this rule.
     ruled.notification.append_rule {
@@ -522,5 +416,11 @@ end)
 
 -- }}}
 
+require('awesome-wallpaper-changer').start({
+	path = '~/Pictures/Backgrounds/',
+	show_notify = false,
+	timeout = 60*15,
+	change_on_click = true
+})
 
 -- vim: tabstop=4 shiftwidth=4 expandtab
