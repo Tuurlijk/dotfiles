@@ -49,14 +49,19 @@ keys.globalkeys      = gears.table.join(
 
 		awful.key({ "Mod1", }, "Tab",
 		          function()
+			          for c in awful.client.iterate(function(x)
+				          return true
+			          end) do
+				          client.focus = c
+				          client.focus:raise()
+			          end
+		          end,
+		          { description = "Cycle through all clients", group = "client" }),
+		awful.key({ "Mod1", "Shift" }, "Tab",
+		          function()
 			          awful.client.focus.byidx(1)
 		          end,
 		          { description = "Focus next by index", group = "client" }),
-		awful.key({ "Mod1", "Shift" }, "Tab",
-		          function()
-			          awful.client.focus.byidx(-1)
-		          end,
-		          { description = "Focus previous by index", group = "client" }),
 		awful.key({ modkey, }, "Tab",
 		          function()
 			          awful.client.focus.byidx(1)
@@ -239,7 +244,14 @@ keys.globalkeys      = gears.table.join(
 			          awful.spawn("amixer -D pipewire sset Master 3%-")
 			          awful.spawn("paplay /usr/share/sounds/freedesktop/stereo/bell.oga")
 		          end,
-		          { description = "3%", group = "hotkeys" }))
+		          { description = "3%", group = "hotkeys" }),
+
+		awful.key({}, "Print",
+		          function()
+			          awful.spawn("flatpak run org.flameshot.Flameshot gui")
+		          end,
+		          { description = "Screenshot", group = "hotkeys" })
+)
 
 keys.clientkeys      = gears.table.join(
 		keys.clientkeys,
