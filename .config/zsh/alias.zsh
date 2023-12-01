@@ -21,7 +21,6 @@ alias .....="cd ../../../.."
 alias -- -="cd -"
 
 # Shortcuts
-alias d=dust
 alias g="git"
 alias ga="git add"
 alias gc="git commit -m"
@@ -41,6 +40,7 @@ alias v=vim
 # Docker
 alias dbd="./.docker/bin/dump.sh"
 alias dp="docker ps"
+alias d=docker-compose
 alias dev="docker-compose -f .docker/docker-compose.yml -f .docker/docker-compose.*.yml"
 alias down='f(){ dev rm -fsv $@; unset -f f; }; f'
 alias up='f(){ dev up -d $@ && dev logs -f before_script after_script; unset -f f; }; f'
