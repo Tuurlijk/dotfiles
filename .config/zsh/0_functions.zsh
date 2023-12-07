@@ -1,3 +1,4 @@
+#!/bin/zsh
 # Function to determine the need of a zcompile. If the .zwc file
 # does not exist, or the base file is newer, we need to compile.
 # man zshbuiltins: zcompile
@@ -214,4 +215,16 @@ j () {
 		echo "Try \`autojump --help\` for more information."
 		false
 	fi
+}
+
+# Shortcut for docker-compose commands. Sometimes the docker-compose.yml file is in the project root and sometimes it
+# is in a .docker folder. Sometimes there is an 'extension' file and often not. This function handles those cases.
+d () {
+  dc=`find ./ -maxdepth 2  -name docker-compose.yml`
+  dc_extended=`find ./ -maxdepth 2  -name "docker-compose.*.yml" | head -n 1`
+  if [[ ! -z  $dc_extended  ]]; then
+    docker-compose -f $dc -f $dc_extended $@
+  else
+    docker-compose -f $dc $@
+  fi
 }
