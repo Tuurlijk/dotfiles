@@ -148,7 +148,7 @@ regit() {
     echo .* | tr " " "\n" >> .gitignore
     git remote add origin "${1}"
     git fetch
-    git checkout origin/master -b master
+    git checkout origin/main -b main
   fi
 }
 
