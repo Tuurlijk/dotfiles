@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# See ~/bin/sunrise-sunset.sh
+# See ~/bin/dusktodawn or ~/Projects/Rust/dusktodawn
 # */5 * * * * ~/bin/kittyMode.sh
 
 declare -A kitty_background
@@ -71,18 +71,10 @@ if [ "$1" != "" ] || ($recreate); then
   echo "# $(date)" >>$zshThemeEnvironment
   echo "# Edit ~/bin/kittyMode.sh instead!" >>$zshThemeEnvironment
 
-  location=${LOCATION:-NLXX5790}
-
-  IFS=':'
-  read -r sunrise <$HOME/tmp/$location.sunrise
-  sunrise=${sunrise/':'/}
-  read -r sunset <$HOME/tmp/$location.sunset
-  sunset=${sunset/':'/}
-
-  nowHourMin=$(date +%H%M)
+  nowHourMin=$(date +%s)
 
   mode=dark
-  if [ $nowHourMin -ge $sunrise ] && [ $nowHourMin -lt $sunset ]; then
+  if [ $nowHourMin -ge $(${HOME}/bin/dusktodawn --dusk) ] && [ $nowHourMin -lt $(${HOME}/bin/dusktodawn --dawn) ]; then
     mode=light
   fi
 
