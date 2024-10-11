@@ -29,6 +29,9 @@ fi
 export LC_ALL='en_US.UTF-8'
 export LC_CTYPE='en_US.UTF-8'
 
+export ANDROID_HOME=${HOME}/Applications/Android/Sdk
+export ANDROID_NDK_HOME=${HOME}/Applications/Android/Sdk/sources/android-29
+
 export KUBECONFIG=${HOME}/.config/kube/config
 
 export TERMINAL=kitty
@@ -133,6 +136,7 @@ path=(\
     ${HOME}/.node/bin \
     ${HOME}/.npm-packages/bin \
     ${HOME}/.rvm/bin \
+    ${HOME}/Applications/Android/Sdk/tools/bin \
     ./bin \
     $path\
     /opt/atlassian/plugin-sdk/bin \
