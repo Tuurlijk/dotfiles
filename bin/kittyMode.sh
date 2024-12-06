@@ -17,11 +17,6 @@ kitty_background_image=(
   [dark]="${HOME}/Pictures/Backgrounds/termBg.png"
   [light]="${HOME}/Pictures/Backgrounds/termBg.day.png"
 )
-declare -A gtk_theme
-gtk_theme=(
-  [dark]="Pop-dark"
-  [light]="Pop"
-)
 declare -A bat_theme
 bat_theme=(
   [dark]="OneHalfDark"
@@ -89,8 +84,8 @@ if [ "$1" != "" ] || ($recreate); then
     kitty @ --to unix:@kitty-$(pidof kitty) set-background-image "${kitty_background_image[$mode]}"
   fi
 
-  # Gnome theme
-  gsettings set org.gnome.desktop.interface gtk-theme ${gtk_theme[$mode]} &
+  # Gnome color-scheme
+  gsettings set org.gnome.desktop.interface color-scheme prefer-$mode
 
   # New terminals
   echo "background_image ${kitty_background_image[$mode]}" >>$kittyThemeEnvironment
