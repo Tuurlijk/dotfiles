@@ -10,7 +10,7 @@ kitty_background=(
 declare -A kitty_foreground
 kitty_foreground=(
   [dark]="#c0c0c0"
-  [light]="#586e75"
+  [light]="#444444"
 )
 declare -A kitty_background_image
 kitty_background_image=(
