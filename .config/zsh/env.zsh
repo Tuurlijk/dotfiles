@@ -30,7 +30,10 @@ export LC_ALL='en_US.UTF-8'
 export LC_CTYPE='en_US.UTF-8'
 
 export ANDROID_HOME=${HOME}/Applications/Android/Sdk
-export ANDROID_NDK_HOME=${HOME}/Applications/Android/Sdk/sources/android-29
+export ANDROID_SDK_ROOT=${HOME}/Applications/Android/Sdk
+export ANDROID_NDK_ROOT=${ANDROID_SDK_ROOT}/ndk/28.0.12433566
+export ANDROID_NDK_HOME=${HOME}/Applications/Android/Sdk/ndk/28.0.12433566
+export ANDROID_API=29
 
 export KUBECONFIG=${HOME}/.config/kube/config
 
