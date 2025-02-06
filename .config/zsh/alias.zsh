@@ -13,12 +13,15 @@ alias kd="kitty +kitten diff"
 # nnn iconlookup likes gawk (GNU awk)
 alias awk=gawk
 
+alias bat=batcat
+
 # Easier navigation: .., ..., ...., ....., ~ and -
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias -- -="cd -"
+alias z="zoxide"
 
 # Shortcuts
 alias g="git"
@@ -41,14 +44,11 @@ alias v=vim
 alias dbd="./.docker/bin/dump.sh"
 alias dp="docker ps"
 alias down='f(){ d rm -fsv $@; unset -f f; }; f'
-alias up='f(){ d up -d $@ && d logs -f before_script after_script; unset -f f; }; f'
-alias re='f(){ d rm -fsv $@ && d up -d $@ && d logs -f before_script after_script; unset -f f; }; f'
+alias up='f(){ d up -d $@; unset -f f; }; f'
+alias re='f(){ d rm -fsv $@ && d up -d $@; unset -f f; }; f'
 alias ds="d exec php zsh -l"
 alias dsx="d exec php_xdebug zsh -l"
 alias de="d exec "
-alias dcf='e_header "Running typo3cms cache:flush"; ds -c "./Web/bin/typo3cms cache:flush"; e_success Done'
-alias dct='e_header "Clearing ./Web/typo3temp/*"; ds -c "echo removing \`find ./Web/typo3temp/ -type f | wc -l\` files; rm -rf ./Web/typo3temp/*"; e_success Done'
-alias dei='e_header "Enabling install tool"; ds -c "touch ./Web/typo3conf/ENABLE_INSTALL_TOOL"; e_success Done'
 alias dip="docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}'"
 alias lzd='lazydocker -f ./.docker/docker-compose.yml'
 
