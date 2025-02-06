@@ -247,8 +247,11 @@ handle_ext() {
     case "$2" in
         epub) generate_preview "$cols" "$lines" "$1" "epub" ;;
         pdf) generate_preview "$cols" "$lines" "$1" "pdf" ;;
+        rs) batcat --paging=never -pp --style='plain' --theme=TwoDark "$1" ;;
         gz|bz2) fifo_pager tar -tvf "$1" ;;
-        md) if exists glow; then
+        md) if exists mdcat; then
+                fifo_pager mdcat "$1"
+            elif exists glow; then
                 fifo_pager glow -s dark "$1"
             elif exists lowdown; then
                 fifo_pager lowdown -Tterm "$1"
