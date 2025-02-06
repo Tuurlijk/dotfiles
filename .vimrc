@@ -36,6 +36,14 @@ Plug 'rstacruz/sparkup'
 " Colors
 Plug 'ap/vim-css-color'
 
+" Rust
+Plug 'rust-lang/rust.vim'
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'dense-analysis/ale'
+
 " And the rest
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-eunuch'
@@ -325,6 +333,25 @@ map <leader>\ :ccl<cr>
 map <leader>n :cn<cr>
 map <leader>p :cp<cr>
 
+" Rust
+if executable('rls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'rls',
+        \ 'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
+        \ 'whitelist': ['rust'],
+        \ })
+endif
+let g:rustfmt_autosave = 1
+let g:rustfmt_emit_files = 1
+let g:rustfmt_fail_silently = 0
+
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
 " Toggles
 nmap <C-n> :tabnew<CR>
 
@@ -349,3 +376,14 @@ noremap <leader>cty :CommandTFlush<cr>
 
 " TComment
 noremap <leader>cc :TComment<cr>
+
+" Netrw
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 14
+"augroup ProjectDrawer
+"  autocmd!
+"  autocmd VimEnter * :Vexplore
+"augroup END
