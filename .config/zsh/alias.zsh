@@ -13,7 +13,7 @@ alias kd="kitty +kitten diff"
 # nnn iconlookup likes gawk (GNU awk)
 alias awk=gawk
 
-alias fs=fdfind
+alias fd=fdfind
 
 alias bat=batcat
 
