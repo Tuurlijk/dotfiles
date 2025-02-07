@@ -1,7 +1,7 @@
 if [ $(uname) = Darwin ]; then
   alias ls='/usr/local/bin/gls --color=auto'
-elif type exa > /dev/null; then
-  alias ls='exa --group-directories-first'
+elif type eza > /dev/null; then
+  alias ls='eza --group-directories-first'
 fi
 
 # Kitty
@@ -12,6 +12,8 @@ alias kd="kitty +kitten diff"
 
 # nnn iconlookup likes gawk (GNU awk)
 alias awk=gawk
+
+alias fs=fdfind
 
 alias bat=batcat
 
@@ -52,13 +54,13 @@ alias de="d exec "
 alias dip="docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}'"
 alias lzd='lazydocker -f ./.docker/docker-compose.yml'
 
-if type exa > /dev/null; then
-  alias l="exa -l --group-directories-first"
-  alias la="exa -lag --group-directories-first"
+if type eza > /dev/null; then
+  alias l="eza -l --group-directories-first"
+  alias la="eza -lag --group-directories-first"
   # List only directories and symbolic links that point to directories
-  alias lsd='exa -ldg --group-directories-first *(-/DN)'
+  alias lsd='eza -ldg --group-directories-first *(-/DN)'
   # List only file beginning with "."
-  alias lsa='exa -ldg --group-directories-first .*'
+  alias lsa='eza -ldg --group-directories-first .*'
 else
   alias l="ls -F"
   alias ll="ls -h -l "
