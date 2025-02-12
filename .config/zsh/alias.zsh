@@ -15,6 +15,8 @@ alias awk=gawk
 
 alias fd=fdfind
 
+alias vv="vim \$(z)"
+
 alias bat=batcat
 
 # Easier navigation: .., ..., ...., ....., ~ and -
@@ -23,7 +25,6 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias -- -="cd -"
-alias z="zoxide"
 
 # Shortcuts
 alias g="git"
@@ -32,15 +33,15 @@ alias gc="git commit -m"
 alias gca="git commit -a -m"
 alias gd="git diff"
 alias gp="git push"
-alias s="git status"
+alias gs="git status"
 alias h="history"
 alias n="nnn -Pp"
 alias open="xdg-open"
 alias o="xdg-open"
 
 # Vim shortcuts
-alias vi=vim
-alias v=vim
+alias vi=nvim
+alias v=nvim
 
 # Docker
 alias dbd="./.docker/bin/dump.sh"

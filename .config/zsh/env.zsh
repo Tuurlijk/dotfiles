@@ -35,13 +35,15 @@ export ANDROID_NDK_ROOT=${ANDROID_SDK_ROOT}/ndk/28.0.12433566
 export ANDROID_NDK_HOME=${HOME}/Applications/Android/Sdk/ndk/28.0.12433566
 export ANDROID_API=29
 
+export MOZ_ENABLE_WAYLAND=1
+
 export KUBECONFIG=${HOME}/.config/kube/config
 
 export TERMINAL=kitty
 
 export PAGER=most
 
-export GREP_COLOR='38;5;202'
+export GREP_COLORS='mt=38;5;202'
 
 export LESS_TERMCAP_mb=$'\E[01;31m'       # begin blinking
 export LESS_TERMCAP_md=$'\E[01;38;5;67m'  # begin bold
