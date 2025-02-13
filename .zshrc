@@ -55,6 +55,8 @@ if [[ ! -s ${ZDOTDIR:-${HOME}}/.config/zsh/cache/settings.zsh ]]; then
 fi
 source ${ZDOTDIR:-${HOME}}/.config/zsh/cache/settings.zsh
 
+eval $(zoxide init --cmd j zsh)
+
 # Load customized prompt
 fpath=(/${ZDOTDIR:-${HOME}}/.config/zsh/functions $fpath)
 autoload -Uz promptinit && promptinit

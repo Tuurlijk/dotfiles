@@ -191,32 +191,6 @@ themeMode () {
   echo $mode
 }
 
-# Autojump function override. The only change is the output color, which is now a dir color
-j () {
-	if [[ ${1} == -* ]] && [[ ${1} != "--" ]]
-	then
-		autojump ${@}
-		return
-	fi
-	setopt localoptions noautonamedirs
-	local output="$(autojump ${@})"
-	if [[ -d "${output}" ]]
-	then
-		if [ -t 1 ]
-		then
-			echo -e "\\033[01;38;5;67m${output}\\033[0m"
-		else
-			echo -e "${output}"
-		fi
-		cd "${output}"
-	else
-		echo "autojump: directory '${@}' not found"
-		echo "\n${output}\n"
-		echo "Try \`autojump --help\` for more information."
-		false
-	fi
-}
-
 # Shortcut for docker-compose commands. Sometimes the docker-compose.yml file is in the project root and sometimes it
 # is in a .docker folder. Sometimes there is an 'extension' file and often not. This function handles those cases.
 d () {
@@ -233,16 +207,17 @@ d () {
 # extending Phantas0's work (https://thevaluable.dev/practical-guide-fzf-example/)
 function z() {
   local selection=$(rg --files --hidden | fzf --multi --print0 \
-  --preview='tree -C {}' \
-  --prompt='Dirs > ' \
+  --preview 'fzf-preview.sh {}' \
+  --preview-window='right,70%' \
+  --prompt='Files > ' \
   --bind='del:execute(rm -ri {+})' \
   --bind='ctrl-p:toggle-preview' \
   --bind='ctrl-d:change-prompt(Dirs > )' \
-  --bind='ctrl-d:+reload(find -type d)' \
+  --bind='ctrl-d:+reload(fdfind --type d)' \
   --bind='ctrl-d:+change-preview(tree -C {})' \
   --bind='ctrl-d:+refresh-preview' \
   --bind='ctrl-f:change-prompt(Files > )' \
-  --bind='ctrl-f:+reload(find -type f)' \
+  --bind='ctrl-f:+reload(rg --files --hidden)' \
   --bind='ctrl-f:+change-preview(batcat --style numbers,changes --color=always {} | head -500)' \
   --bind='ctrl-f:+refresh-preview' \
   --bind='ctrl-a:select-all' \
