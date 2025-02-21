@@ -105,8 +105,7 @@ export PISTOL_DEBUG=0
 #
 export EXA_COLORS="da=38;5;67:sn=38;5;28:uu=38;5;65:sb=38;33"
 
-# See ~/bin/sunrise-sunset.sh
-export LOCATION=NLXX5790
+eval "$(zoxide init zsh --cmd j)"
 
 # load Rust env
 if [[ -f "$HOME/.cargo/env" ]]; then
