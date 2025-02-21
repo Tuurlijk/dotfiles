@@ -1,6 +1,6 @@
 if [ $(uname) = Darwin ]; then
   alias ls='/usr/local/bin/gls --color=auto'
-elif type eza > /dev/null; then
+elif command -v eza > /dev/null; then
   alias ls='eza --group-directories-first'
 fi
 
@@ -15,9 +15,14 @@ alias awk=gawk
 
 alias fd=fdfind
 
-alias vv="vim \$(z)"
-
-alias bat=batcat
+if command -v batcat > /dev/null; then
+  alias bat=batcat
+  alias c=batcat
+  alias b=batcat
+else
+  alias c=cat
+  alias b=cat
+fi
 
 # Easier navigation: .., ..., ...., ....., ~ and -
 alias ..="cd .."
@@ -40,22 +45,29 @@ alias open="xdg-open"
 alias o="xdg-open"
 
 # Vim shortcuts
-alias vi=nvim
-alias v=nvim
+if command -v nvim > /dev/null; then
+  alias vi=nvim
+  alias v=nvim
+else
+  alias vi=vim
+  alias v=vi
+fi
+
+alias vv="vim \$(z)"
 
 # Docker
 alias dbd="./.docker/bin/dump.sh"
 alias dp="docker ps"
 alias down='f(){ d rm -fsv $@; unset -f f; }; f'
-alias up='f(){ d up -d $@; unset -f f; }; f'
-alias re='f(){ d rm -fsv $@ && d up -d $@; unset -f f; }; f'
+alias up='f(){ d build && d up -d $@; unset -f f; }; f'
+alias re='f(){ d rm -fsv $@ && d build && d up -d $@; unset -f f; }; f'
 alias ds="d exec php zsh -l"
 alias dsx="d exec php_xdebug zsh -l"
 alias de="d exec "
 alias dip="docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}'"
 alias lzd='lazydocker -f ./.docker/docker-compose.yml'
 
-if type eza > /dev/null; then
+if command -v eza > /dev/null; then
   alias l="eza -l --group-directories-first"
   alias la="eza -lag --group-directories-first"
   # List only directories and symbolic links that point to directories

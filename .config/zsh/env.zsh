@@ -108,15 +108,13 @@ export EXA_COLORS="da=38;5;67:sn=38;5;28:uu=38;5;65:sb=38;33"
 # See ~/bin/sunrise-sunset.sh
 export LOCATION=NLXX5790
 
-# load autojump
-if [[ -e /usr/share/autojump/autojump.zsh ]]; then
-  . /usr/share/autojump/autojump.zsh
-fi
-
 # load Rust env
 if [[ -f "$HOME/.cargo/env" ]]; then
   . "$HOME/.cargo/env"
 fi
+
+# Load aliases in LC_LOCAL_ALIASES so we can use it on remote machines
+export LC_LOCAL_ALIASES="$(cat ~/dotfiles/.config/zsh/alias.zsh)"
 
 # Disabled because of slowness
 # # Ruby version manager
