@@ -40,7 +40,7 @@ alias gd="git diff"
 alias gp="git push"
 alias gs="git status"
 alias h="history"
-alias n="nnn -Pp"
+alias n="nnn -e -Pp"
 alias open="xdg-open"
 alias o="xdg-open"
 
