@@ -206,7 +206,7 @@ d () {
 # fuzzy explorer
 # extending Phantas0's work (https://thevaluable.dev/practical-guide-fzf-example/)
 function z() {
-  local selection=$(rg --files --hidden | fzf --multi --print0 \
+  local selection=$(rg --files --hidden --follow | fzf --multi --print0 \
   --preview 'fzf-preview.sh {}' \
   --preview-window='right,70%' \
   --prompt='Files > ' \
@@ -217,7 +217,7 @@ function z() {
   --bind='ctrl-d:+change-preview(tree -C {})' \
   --bind='ctrl-d:+refresh-preview' \
   --bind='ctrl-f:change-prompt(Files > )' \
-  --bind='ctrl-f:+reload(rg --files --hidden)' \
+  --bind='ctrl-f:+reload(rg --files --hidden --follow)' \
   --bind='ctrl-f:+change-preview(batcat --style numbers,changes --color=always {} | head -500)' \
   --bind='ctrl-f:+refresh-preview' \
   --bind='ctrl-a:select-all' \
