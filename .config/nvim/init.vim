@@ -183,6 +183,9 @@ nnoremap <leader>T :Tags<CR>
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
+" Remap :e to use fzf's :Files
+cabbrev e Files<CR>
+
 " Fast editing of the init.vim
 map <leader>e :tabedit! ~/.config/nvim/init.vim<cr>
 " When vimrc is edited, reload it
