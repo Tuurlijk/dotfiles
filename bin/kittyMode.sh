@@ -38,6 +38,19 @@ export DISPLAY=:0
 export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus
 export PATH=/bin:/usr/bin/:/usr/local/bin
 
+# Is it light or dark?
+nowHourMin=$(date +%s)
+
+mode=dark
+if [ $nowHourMin -ge $(${HOME}/bin/dusktodawn --dusk) ] && [ $nowHourMin -lt $(${HOME}/bin/dusktodawn --dawn) ]; then
+  mode=light
+fi
+
+if [ "$1" != "" ]; then
+  mode=$1
+fi
+
+# Should we recreate the config files for zsh and kitty?
 nowTimestamp=$(date +%s)
 aWhileAgo=$(expr $nowTimestamp - 300)
 recreate=false
@@ -66,27 +79,6 @@ if [ "$1" != "" ] || ($recreate); then
   echo "# $(date)" >>$zshThemeEnvironment
   echo "# Edit ~/bin/kittyMode.sh instead!" >>$zshThemeEnvironment
 
-  nowHourMin=$(date +%s)
-
-  mode=dark
-  if [ $nowHourMin -ge $(${HOME}/bin/dusktodawn --dusk) ] && [ $nowHourMin -lt $(${HOME}/bin/dusktodawn --dawn) ]; then
-    mode=light
-  fi
-
-  if [ "$1" != "" ]; then
-    mode=$1
-  fi
-
-  # Active terminals
-  if pgrep -x kitty >/dev/null
-  then
-    kitty @ --to unix:@kitty-$(pidof kitty) set-colors -a background=${kitty_background[$mode]} foreground=${kitty_foreground[$mode]}
-    kitty @ --to unix:@kitty-$(pidof kitty) set-background-image "${kitty_background_image[$mode]}"
-  fi
-
-  # Gnome color-scheme
-  gsettings set org.gnome.desktop.interface color-scheme prefer-$mode
-
   # New terminals
   echo "background_image ${kitty_background_image[$mode]}" >>$kittyThemeEnvironment
   echo "background ${kitty_background[$mode]}" >>$kittyThemeEnvironment
@@ -97,3 +89,13 @@ if [ "$1" != "" ] || ($recreate); then
   echo "export IL_C_DIRTXT=\"${iconlookup_dirtxt[$mode]}\"" >>$zshThemeEnvironment
   echo "export IL_C_FILETXT=\"${iconlookup_filetxt[$mode]}\"" >>$zshThemeEnvironment
 fi
+
+# Active terminals
+if pgrep -x kitty >/dev/null
+then
+  kitty @ --to unix:@kitty-$(pidof kitty) set-colors -a background=${kitty_background[$mode]} foreground=${kitty_foreground[$mode]}
+  kitty @ --to unix:@kitty-$(pidof kitty) set-background-image "${kitty_background_image[$mode]}"
+fi
+
+# Gnome color-scheme
+gsettings set org.gnome.desktop.interface color-scheme prefer-$mode
