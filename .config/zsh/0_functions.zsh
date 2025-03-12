@@ -206,38 +206,55 @@ d () {
 # fuzzy explorer
 # extending Phantas0's work (https://thevaluable.dev/practical-guide-fzf-example/)
 function z() {
+  # Check if a directory argument is provided
+  if [ $# -gt 0 ]; then
+    pushd "$1" > /dev/null || return 1
+  fi
+
+  # Run the fuzzy finder from the current directory (either original or pushed)
   local selection=$(rg --files --hidden | fzf --multi --print0 \
-  --preview 'fzf-preview.sh {}' \
-  --preview-window='right,70%' \
-  --prompt='Files > ' \
-  --bind='del:execute(rm -ri {+})' \
-  --bind='ctrl-p:toggle-preview' \
-  --bind='ctrl-d:change-prompt(Dirs > )' \
-  --bind='ctrl-d:+reload(fdfind --type d)' \
-  --bind='ctrl-d:+change-preview(tree -C {})' \
-  --bind='ctrl-d:+refresh-preview' \
-  --bind='ctrl-f:change-prompt(Files > )' \
-  --bind='ctrl-f:+reload(rg --files --hidden)' \
-  --bind='ctrl-f:+change-preview(batcat --style numbers,changes --color=always {} | head -500)' \
-  --bind='ctrl-f:+refresh-preview' \
-  --bind='ctrl-a:select-all' \
-  --bind='ctrl-x:deselect-all' \
-  --border-label ' fzf Explorer ' \
-  --header ' CTRL-D (directories) CTRL-F (files)
+    --preview 'fzf-preview.sh {}' \
+    --preview-window='right,70%' \
+    --prompt='Files > ' \
+    --bind='del:execute(rm -ri {+})' \
+    --bind='ctrl-p:toggle-preview' \
+    --bind='ctrl-d:change-prompt(Dirs > )' \
+    --bind='ctrl-d:+reload(fdfind --type d)' \
+    --bind='ctrl-d:+change-preview(tree -C {})' \
+    --bind='ctrl-d:+refresh-preview' \
+    --bind='ctrl-f:change-prompt(Files > )' \
+    --bind='ctrl-f:+reload(rg --files --hidden)' \
+    --bind='ctrl-f:+change-preview(batcat --style numbers,changes --color=always {} | head -500)' \
+    --bind='ctrl-f:+refresh-preview' \
+    --bind='ctrl-a:select-all' \
+    --bind='ctrl-x:deselect-all' \
+    --border-label ' fzf Explorer ' \
+    --header ' CTRL-D (directories) CTRL-F (files)
  CTRL-A (select all) CTRL-X (deselect)
  CTRL-P (toggle preview) DEL (delete)'
   )
 
-  # if no selection made do nothing
+  # If no selection is made, pop back and exit
   if [ -z "$selection" ]; then
+    if [ $# -gt 0 ]; then
+      popd > /dev/null
+    fi
     return 0
   fi
 
-  # if selection is a folder (with multiples go to the first)
-  if [ -d "$(echo $selection | sed 's/\x0.*$//')" ]; then
-    cd "$selection" || exit
+  # Convert selection to absolute paths
+  abs_selection=$(echo "$selection" | tr '\0' '\n' | xargs -I {} realpath {} | tr '\n' '\0')
+
+  # Check the first selection to determine if it's a directory
+  first_selection=$(echo "$abs_selection" | sed 's/\x0.*$//')
+  if [ -d "$first_selection" ]; then
+    # Directory selected: cd to it and do not popd
+    cd "$first_selection" || return 1
   else
-    # supports multiple selections
-    eval $EDITOR $(echo $selection |sed -e 's/\x00/ /g')
+    # Files selected: run editor, then popd if we pushed
+    eval "$EDITOR" $(echo "$abs_selection" | sed -e 's/\x00/ /g')
+    if [ $# -gt 0 ]; then
+      popd > /dev/null
+    fi
   fi
 }
