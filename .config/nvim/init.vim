@@ -175,6 +175,27 @@ MapToggle <F3> list
 MapToggle <F5> wrap
 
 " Fuzzy Find
+" Custom command to override :e
+command! -nargs=? -complete=dir E call s:EditWithFzf(<q-args>)
+cnoreabbrev e E
+
+" Function to handle :e with fzf
+function! s:EditWithFzf(dir)
+  if empty(a:dir)
+    " If no directory is provided, use the current working directory
+    Files
+  else
+    " Use the provided directory (expanding ~ to full path)
+    let l:dir = expand(a:dir)
+    if isdirectory(l:dir)
+      execute 'Files ' . fnameescape(l:dir)
+    else
+      " Fallback to default :e behavior if the argument is not a directory
+      execute 'edit ' . fnameescape(l:dir)
+    endif
+  endif
+endfunction
+
 nnoremap <C-p> :Files<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>h :History<CR>
@@ -182,9 +203,6 @@ nnoremap <leader>t :BTags<CR>
 nnoremap <leader>T :Tags<CR>
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
-
-" Remap :e to use fzf's :Files
-cabbrev e Files<CR>
 
 " Fast editing of the init.vim
 map <leader>e :tabedit! ~/.config/nvim/init.vim<cr>
