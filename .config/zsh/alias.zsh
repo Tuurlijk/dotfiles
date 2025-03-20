@@ -39,6 +39,7 @@ alias .....="cd ../../../.."
 alias -- -="cd -"
 
 # Shortcuts
+alias ci="cargo install --path ."
 alias g="git"
 alias ga="git add"
 alias gc="git commit -m"
