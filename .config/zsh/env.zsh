@@ -127,6 +127,11 @@ export LC_LOCAL_ALIASES="$(cat ~/dotfiles/.config/zsh/alias.zsh)"
 #     eval `luarocks path --bin`
 # fi
 
+# Fix broken cargo in Cursor terminal sessions: https://github.com/getcursor/cursor/issues/549
+if [[ "$APPIMAGE" == *"Cursor"* ]]; then
+  unset ARGV0
+fi
+
 path=(\
     ${GOBIN} \
     ${HOME}/.cargo/bin \
