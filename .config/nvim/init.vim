@@ -26,6 +26,9 @@ Plug 'edkolev/promptline.vim', { 'on': 'PromptlineSnapshot' }
 " Autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" Context
+Plug 'wellle/context.vim'
+
 " Git
 Plug 'airblade/vim-gitgutter'
 
