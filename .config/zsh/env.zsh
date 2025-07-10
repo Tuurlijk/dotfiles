@@ -1,7 +1,8 @@
-HISTFILE=~/.zshhistory
+HISTFILE=~/.zsh_history
 HISTSIZE=3000
 SAVEHIST=3000
-# Share history between tmux windows
+setopt HIST_FIND_NO_DUPS
+setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
 
 # Treat \, . and _ as word-boundaries
@@ -118,11 +119,12 @@ export LC_LOCAL_ALIASES="$(cat ~/dotfiles/.config/zsh/alias.zsh)"
 # Disabled because of slowness
 # # Ruby version manager
 # [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-#
-# # Node version manager
-# export NVM_DIR="$HOME/.nvm"
-# [[ -s "$NVM_DIR/nvm.sh" ]] && . "$NVM_DIR/nvm.sh"
-#
+
+# Node version manager
+export NVM_DIR="${ZDOTDIR:-${HOME}}/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
 # if (( $+commands[luarocks] )); then
 #     eval `luarocks path --bin`
 # fi
@@ -142,6 +144,7 @@ path=(\
     ./vendor/bin \
     ${HOME}/.node/bin \
     ${HOME}/.npm-packages/bin \
+    ${HOME}/.local/share/pnpm \
     ${HOME}/.rvm/bin \
     ${HOME}/Applications/Android/Sdk/tools/bin \
     ./bin \

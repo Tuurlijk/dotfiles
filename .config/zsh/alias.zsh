@@ -73,6 +73,7 @@ alias ds="d exec php zsh -l"
 alias dsx="d exec php_xdebug zsh -l"
 alias de="d exec "
 alias dip="docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}'"
+alias ddip="ddev describe -j | jq .raw.httpsURLs,.raw.services.db"
 alias lzd='lazydocker -f ./.docker/docker-compose.yml'
 
 if command -v eza > /dev/null; then
