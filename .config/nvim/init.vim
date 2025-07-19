@@ -61,6 +61,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree'
+Plug 'sphamba/smear-cursor.nvim'
 
 call plug#end()
 
