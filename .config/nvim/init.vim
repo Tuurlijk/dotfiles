@@ -438,6 +438,9 @@ let g:ctrlp_custom_ignore = {
 let g:sparkupNextMapping = '<c-n>'
 let g:sparkupExecuteMapping = '<c-e>'
 
+" Smear cursor
+lua require('smear_cursor').enabled = true
+
 " CommandT
 let g:CommandTMaxHeight = 30
 noremap <leader>ct :CommandT<cr>
