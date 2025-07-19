@@ -438,8 +438,22 @@ let g:ctrlp_custom_ignore = {
 let g:sparkupNextMapping = '<c-n>'
 let g:sparkupExecuteMapping = '<c-e>'
 
+" Load smear cursor when version is above 0.10.1
+if has('nvim')
+  let v = luaeval('vim.version()')
+  if v.major >= 1 || (v.major == 0 && v.minor > 10) || (v.major == 0 && v.minor == 10 && v.patch >= 2)
+    let g:smear_cursor_enabled = 1
+  else
+    let g:smear_cursor_enabled = 0
+  endif
+else
+  let g:smear_cursor_enabled = 0
+endif
+
 " Smear cursor
-lua require('smear_cursor').enabled = true
+if g:smear_cursor_enabled
+  lua require('smear_cursor').enabled = true
+endif
 
 " CommandT
 let g:CommandTMaxHeight = 30
