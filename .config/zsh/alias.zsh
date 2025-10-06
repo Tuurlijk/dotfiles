@@ -75,6 +75,7 @@ alias de="d exec "
 alias dip="docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}'"
 alias ddip="ddev describe -j | jq .raw.httpsURLs,.raw.services.db"
 alias lzd='lazydocker -f ./.docker/docker-compose.yml'
+alias vim=nvim
 
 if command -v eza > /dev/null; then
   alias l="eza -l --group-directories-first"
