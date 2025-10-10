@@ -22,7 +22,7 @@ zle -N history-beginning-search-forward-end history-search-end
 bindkey "${terminfo[kcuu1]}" history-beginning-search-backward-end
 bindkey "${terminfo[kcud1]}" history-beginning-search-forward-end
 bindkey '^r' history-substring-search-up
-bindkey '^s' history-substring-search-down
+bindkey '^[s' history-substring-search-down
 bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
 bindkey '^k' kill-line
