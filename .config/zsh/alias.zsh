@@ -54,6 +54,7 @@ alias o="xdg-open"
 
 # Vim shortcuts
 if command -v nvim > /dev/null; then
+  alias vim=nvim
   alias vi=nvim
   alias v=nvim
 else

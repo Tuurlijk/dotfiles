@@ -18,9 +18,9 @@ else
 fi
 
 # Editors
-export EDITOR='vim'
-export GIT_EDITOR='vim'
-export VISUAL='vim'
+export EDITOR='nvim'
+export GIT_EDITOR='nvim'
+export VISUAL='nvim'
 export PAGER='less'
 
 # Language
