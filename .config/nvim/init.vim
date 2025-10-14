@@ -98,7 +98,6 @@ set number relativenumber " Show line numbers
 set copyindent
 set nostartofline      " Don't jump to start of line on pagedown
 set nrformats+=alpha   " Allows CTRL-A and CTRL-X to increment/decrement letters
-set pastetoggle=<F11>
 set scrolloff=3        " Keep 3 lines above and below the cursor
 set shiftwidth=2
 set shortmess=aI       " Avoid 'Hit enter to continue' message, no intro msg
