@@ -38,37 +38,6 @@ main () {
         done
     done
 
-    e_header "Installing vim plugins..."
-    vim -S <(echo -e "PlugInst \n q \n q")
-
-#    e_header "Compiling command-t for current ruby version..."
-#    pushd $home/${PWD##*/}/.vim/plugged/command-t/ruby/command-t
-#    if command -v ruby > /dev/null 2>&1; then
-#        ruby extconf.rb
-#        if command -v make > /dev/null 2>&1; then
-#            make
-#        fi
-#    fi
-#    popd
-#
-#    e_header "Installing tmux plugins..."
-#    pushd $home/${PWD##*/}/.tmux
-#    if command -v tmux > /dev/null 2>&1; then
-#        e_arrow We have tmux
-#        if command -v git > /dev/null 2>&1; then
-#            if [[ ! -d plugins/tpm ]]; then
-#                e_arrow Cloning tpm
-#                git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-#            else
-#                e_arrow Tpm already installed, updating
-#                pushd plugins/tpm
-#                git pull
-#                popd
-#            fi
-#        fi
-#    fi
-#    popd
-
     source $home/.config/zsh/0_functions.zsh
     e_header "Concatenating .config/zsh files into single file..."
     recreateCachedSettingsFile
