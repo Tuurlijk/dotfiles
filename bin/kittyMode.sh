@@ -93,8 +93,11 @@ fi
 # Active terminals
 if pgrep -x kitty >/dev/null
 then
-  kitty @ --to unix:@kitty-$(pidof kitty) set-colors -a background=${kitty_background[$mode]} foreground=${kitty_foreground[$mode]}
-  kitty @ --to unix:@kitty-$(pidof kitty) set-background-image "${kitty_background_image[$mode]}"
+  for p in `pidof kitty`;
+  do
+    kitty @ --to unix:/tmp/kitty-$p set-colors -a background=${kitty_background[$mode]} foreground=${kitty_foreground[$mode]}
+    kitty @ --to unix:/tmp/kitty-$p set-background-image "${kitty_background_image[$mode]}"
+  done
 fi
 
 # Gnome color-scheme
