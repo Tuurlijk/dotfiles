@@ -13,5 +13,5 @@ fi
 . "$HOME/.cargo/env"
 
 # Begin added by argcomplete
-fpath=( /usr/lib/python3.13/site-packages/argcomplete/bash_completion.d "${fpath[@]}" )
+fpath=( /usr/lib/python3.14/site-packages/argcomplete/bash_completion.d "${fpath[@]}" )
 # End added by argcomplete
